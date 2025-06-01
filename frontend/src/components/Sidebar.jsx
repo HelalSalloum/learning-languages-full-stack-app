@@ -1,8 +1,10 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
 import { BellIcon, HomeIcon, ShipWheelIcon, UsersIcon } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const { authUser } = useAuthUser();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -51,7 +53,10 @@ const Sidebar = () => {
       </nav>
 
       {/* USER PROFILE SECTION */}
-      <div className="p-4 border-t border-base-300 mt-auto">
+      <div
+        className="p-4 border-t border-base-300 mt-auto cursor-pointer hover:bg-primary transition-colors rounded-lg"
+        onClick={() => navigate("/onboarding")}
+      >
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="w-10 rounded-full">

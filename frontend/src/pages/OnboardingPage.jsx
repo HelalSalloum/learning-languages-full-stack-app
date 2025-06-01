@@ -10,6 +10,7 @@ import {
   ShuffleIcon,
 } from "lucide-react";
 import { LANGUAGES } from "../constants";
+import { useNavigate } from "react-router";
 
 const OnboardingPage = () => {
   const { authUser } = useAuthUser();
@@ -24,11 +25,14 @@ const OnboardingPage = () => {
     profilePic: authUser?.profilePic || "",
   });
 
+  const navigate = useNavigate();
+
   const { mutate: onboardingMutation, isPending } = useMutation({
     mutationFn: completeOnboarding,
     onSuccess: () => {
       toast.success("Profile onboarded successfully");
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
+      navigate("/");
     },
 
     onError: (error) => {

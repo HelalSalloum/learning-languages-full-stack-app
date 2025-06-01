@@ -3,9 +3,11 @@ import useAuthUser from "../hooks/useAuthUser";
 import { BellIcon, LogOutIcon, ShipWheelIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import useLogout from "../hooks/useLogout";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const { authUser } = useAuthUser();
+  const navigate = useNavigate();
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
 
@@ -45,13 +47,15 @@ const Navbar = () => {
           <ThemeSelector />
 
           <div className="avatar">
-            <div className="w-9 rounded-full">
-              <img
-                src={authUser?.profilePic}
-                alt="User Avatar"
-                rel="noreferrer"
-              />
-            </div>
+            <Link to={"/onboarding"}>
+              <div className="w-9 rounded-full">
+                <img
+                  src={authUser?.profilePic}
+                  alt="User Avatar"
+                  rel="noreferrer"
+                />
+              </div>
+            </Link>
           </div>
 
           {/* Logout button */}
